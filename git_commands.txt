@@ -1,0 +1,92 @@
+Git Commands Used in the Assignment
+Name: Manasvi Sabbarwal | Roll No: 2024eb02493
+==================================================
+
+STEP 1 - LOCAL REPOSITORY SETUP
+mkdir portfolio-site
+    Shell command (not Git) that creates the project folder.
+cd portfolio-site
+    Shell command that moves into the project folder.
+git init -b main
+    Creates an empty Git repository (hidden .git folder) with "main" as the first branch.
+ls -a
+    Shell command that lists all files, including the hidden .git folder.
+git status
+    Shows which files are untracked, modified or staged, and the current branch.
+
+STEP 2 - GIT WORKFLOW
+git add index.html about.html
+    Moves the two files into the staging area so they go into the next commit.
+git commit -m "feat: add initial index.html and about.html"
+    Records the staged files as the first snapshot (initial commit) of the project.
+git diff
+    Shows the line-by-line changes in the working directory that are not staged yet.
+git add index.html
+    Stages the modified index.html.
+git commit -m "feat: add home page description to index.html"
+    Records the second commit on the main branch.
+git branch feature
+    Creates a new branch named "feature" pointing at the current commit.
+git checkout feature
+    Switches the working directory to the feature branch.
+git branch
+    Lists all local branches; the current branch is marked with *.
+git add about.html
+    Stages the change made to about.html on the feature branch.
+git commit -m "feat: add contact details to about.html"
+    Commits the change only to the feature branch.
+git checkout main
+    Switches back to the main branch.
+git merge --no-ff feature -m "Merge branch 'feature' into main"
+    Merges feature into main; --no-ff always creates a merge commit so the branch stays visible in history.
+git branch
+    (after the merge) Confirms main is the current branch again.
+git log --oneline --graph --all --decorate
+    Shows the full commit history as a compact graph with branch names.
+
+STEP 3 - .GITIGNORE
+cat .gitignore
+    Shell command that prints the ignore rules (*.log files and the temp/ folder).
+git add .gitignore
+    Stages the .gitignore file.
+git commit -m "chore: add .gitignore for log files and temp folder"
+    Commits the ignore rules so they are shared with everyone using the repository.
+git status --ignored
+    Shows the files Git is ignoring (debug.log and temp/), proving .gitignore works.
+
+STEP 4 - UNDO OPERATION
+git commit -m "feat: add footer comment to index.html"
+    Extra commit that is undone in the next command.
+git log --oneline -3
+    Shows the last three commits before the undo.
+git revert --no-edit HEAD
+    Creates a new commit that reverses the last commit; history is kept, so it is safe to push.
+git log --oneline -4
+    Shows the original commit and its revert commit in the history.
+(Alternative, not used) git reset --hard HEAD~1
+    Deletes the last commit and its changes; rewrites history, so it is avoided once work is shared.
+
+STEP 5 - GITHUB INTEGRATION
+git remote add origin https://github.com/Manasvi-247/portfolio-site.git
+    Links the local repository to the empty public repository on GitHub under the name "origin".
+git remote -v
+    Shows the fetch and push URLs of the connected remote.
+git push -u --force origin main
+    Uploads main with all its commits and sets origin/main as the upstream branch.
+    (--force replaced an earlier trial push in the same new repository.)
+git push --force origin feature
+    Uploads the feature branch so the branch also appears on GitHub.
+git branch -a
+    Lists local and remote-tracking branches (origin/main, origin/feature).
+git fetch origin
+    Downloads the latest state of the GitHub repository.
+git log --oneline --graph --decorate origin/main
+    Shows the history stored on GitHub, confirming every commit was pushed.
+
+STEP 6 - DOCUMENTATION FILE
+ls
+    Shell command that confirms git_commands.txt is in the project folder.
+git add git_commands.txt
+    Stages this documentation file.
+git commit -m "docs: add git_commands.txt with explanations"
+    Commits this file so it is included in the repository.
